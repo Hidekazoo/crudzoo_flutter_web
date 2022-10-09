@@ -1,7 +1,146 @@
+import 'package:crudzoo_flutter_web/api/health_check.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    title: 'Navigation Basics',
+    home: FirstRoute(),
+  ));
+}
+
+class FirstRoute extends StatelessWidget {
+  const FirstRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: const Text('First Route')),
+        body: Center(
+            child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondRoute()),
+            );
+          },
+          child: const Text('Open route'),
+        )));
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Health Check'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const MyStatelessWidget(),
+            Center(
+                child: ElevatedButton(
+              onPressed: () {
+                // Navigate back to first route when tapped.
+                Navigator.pop(context);
+              },
+              child: const Text('Go back!'),
+            )),
+          ],
+        ));
+  }
+}
+
+class HealthCheck extends StatefulWidget {
+  const HealthCheck({super.key});
+
+  @override
+  HealthCheckState createState() {
+    return HealthCheckState();
+  }
+}
+
+class HealthCheckState extends State<HealthCheck> {
+  String _status = "loading...";
+
+  late Future<ApiStatus> apiStatus;
+
+  @override
+  void initState() {
+    super.initState();
+    apiStatus = fetchHealthCheck();
+  }
+
+  void setStatus() {
+    setState(() {
+      _status = "success";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        FutureBuilder<ApiStatus>(
+            future: apiStatus,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data!.status);
+              } else if (snapshot.hasError) {
+                return const Icon(
+                  Icons.signal_cellular_connected_no_internet_0_bar_sharp,
+                  color: Colors.red,
+                  size: 30.0,
+                );
+              }
+              return const CircularProgressIndicator();
+            })
+        // ElevatedButton(
+        //   onPressed: () {
+        //     setStatus();
+        //   }, child: const Text('check')),
+      ],
+    );
+  }
+}
+
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DataTable(
+      columns: const <DataColumn>[
+        DataColumn(
+          label: Expanded(
+            child: Text(
+              'API Name',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+        DataColumn(
+          label: Expanded(
+            child: Text(
+              'Status',
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+      ],
+      rows: const <DataRow>[
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('bff')),
+            DataCell(HealthCheck()),
+          ],
+        ),
+      ],
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -13,6 +152,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Crudzoo Note',
       theme: ThemeData(
+        useMaterial3: true,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -96,12 +236,11 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Hello World!',
+              'Hello World!　日本語テスト',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Text('$_counter',
+                style: Theme.of(context).textTheme.headline4,
+                key: const Key('testable')),
           ],
         ),
       ),
