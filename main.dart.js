@@ -7961,7 +7961,7 @@ _.$ti=c},
 acq(){var s=0,r=A.aa(t.CQ),q,p
 var $async$acq=A.ab(function(a,b){if(a===1)return A.a7(b,r)
 while(true)switch(s){case 0:s=3
-return A.ae(A.ax5(A.fS("test/health")),$async$acq)
+return A.ae(A.ax5(A.fS("https://crudzoo-mypage-bff-4yv7yg6exq-an.a.run.app/health")),$async$acq)
 case 3:p=b
 if(p.b===200){q=new A.m2(J.b3(B.b6.ID(0,A.awR(J.b3(A.auP(p.e).c.a,"charset")).d8(0,p.w),null),"status"))
 s=1
