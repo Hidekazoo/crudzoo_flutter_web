@@ -17,7 +17,7 @@ jobs:
         channel: 'stable'
     - run: flutter --version
     - run: flutter pub get
-    - run: flutter build web
+    - run: flutter build web --dart-define=API_ENDPOINT="${{ secrets.API_ENDPOINT }}"
     - uses: s0/git-publish-subdir-action@develop
       env:
         REPO: self
