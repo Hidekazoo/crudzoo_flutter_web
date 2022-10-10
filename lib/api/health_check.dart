@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 Future<ApiStatus> fetchHealthCheck() async {
-  final response = await http.get(Uri.parse('/bff/health'));
+  final response = await http.get(Uri.parse('${const String.fromEnvironment('API_ENDPOINT', defaultValue: "test")}/health'));
   if (response.statusCode == 200) {
     return ApiStatus.fromJson(jsonDecode(response.body));
   } else {
