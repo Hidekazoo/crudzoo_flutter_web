@@ -1,4 +1,6 @@
 import 'package:crudzoo_flutter_web/api/health_check.dart';
+import 'package:crudzoo_flutter_web/components/ListItem.dart';
+import 'package:crudzoo_flutter_web/viewState/worth_doing_later.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
@@ -15,16 +17,7 @@ class FirstRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('First Route')),
-        body: Center(
-            child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondRoute()),
-            );
-          },
-          child: const Text('Open route'),
-        )));
+        body: const Center(child: WorthDoingLater()));
   }
 }
 
