@@ -1,6 +1,6 @@
 
 
-import 'package:crudzoo_flutter_web/api/worth_doing_later.dart';
+import 'package:crudzoo_flutter_web/api/tasks.dart';
 import 'package:crudzoo_flutter_web/components/ListItem.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +17,12 @@ class WorthDoingLater extends StatefulWidget {
 
 class WorthDoingLaterState extends State<WorthDoingLater> {
 
-  late Future<List<WorthDoingLaterResponse>> worthDoingLaterResponse;
+  late Future<List<TasksResponse>> worthDoingLaterResponse;
 
   @override
   void initState() {
     super.initState();
-    worthDoingLaterResponse = fetchWorthDoingLater();
+    worthDoingLaterResponse = fetchTasks();
   }
 
   @override
@@ -31,7 +31,7 @@ class WorthDoingLaterState extends State<WorthDoingLater> {
         future: worthDoingLaterResponse,
         builder: (context,snapshot) {
       if (snapshot.hasData) {
-        return ListItem(items: snapshot.data!.map((e) => Item(title: e.title, link: e.link, supplement: e.supplement)).toList());
+        return ListItem(items: snapshot.data!.map((e) => Item(title: e.subject, link: e.link, supplement: e.body)).toList());
       }
       return const CircularProgressIndicator();
     });

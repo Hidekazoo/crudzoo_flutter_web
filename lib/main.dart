@@ -17,7 +17,10 @@ class FirstRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('First Route')),
-        body: const Center(child: WorthDoingLater()));
+        body: Column(children: const [
+          // Text('test app!'),
+          Center(child: WorthDoingLater())
+        ]));
   }
 }
 

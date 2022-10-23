@@ -30,7 +30,6 @@ class ListItem extends StatelessWidget {
                     ],
                   ),
                 ))
-            .toList()
-        ));
+            .toList()));
   }
 }
