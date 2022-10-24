@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Item {
-  final String title;
+  final String subject;
   final String link;
-  final String supplement;
+  final String body;
 
   const Item(
-      {required this.title, required this.link, required this.supplement});
+      {required this.subject, required this.link, required this.body});
 }
 
 class ListItem extends StatelessWidget {
@@ -17,16 +17,18 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (ListView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         children: items
             .map((element) => Card(
                   child: ExpansionTile(
-                    title: Text(element.title),
+                    title: Text(element.subject),
                     subtitle: const Text("タイトルに対する何かの表記"),
                     leading: const Icon(Icons.import_contacts_sharp),
                     controlAffinity: ListTileControlAffinity.trailing,
                     children: <Widget>[
                       Text(element.link),
-                      ListTile(title: Text(element.supplement)),
+                      ListTile(title: Text(element.body)),
                     ],
                   ),
                 ))

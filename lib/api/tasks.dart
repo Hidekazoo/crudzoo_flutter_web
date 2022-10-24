@@ -20,7 +20,6 @@ class TasksApi {
 Future<List<TasksResponse>> fetchTasks() async {
   final response = await http.get(Uri.parse(
       '${const String.fromEnvironment('API_ENDPOINT', defaultValue: "")}/worth_doing_later'));
-
   if (response.statusCode == 200) {
     var items = (jsonDecode(response.body)['data'] as List)
         .map((e) => TasksResponse.fromJson(e))
@@ -41,6 +40,6 @@ class TasksResponse {
 
   factory TasksResponse.fromJson(Map<String, dynamic> json) {
     return TasksResponse(
-        subject: json['title'], link: json['link'], body: json['suppliment']);
+        subject: json['subject'], link: json['link'], body: json['body']);
   }
 }
