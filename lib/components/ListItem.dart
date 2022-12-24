@@ -1,3 +1,4 @@
+import 'package:crudzoo_flutter_web/entities/task.dart';
 import 'package:flutter/material.dart';
 
 class Item {
@@ -10,7 +11,7 @@ class Item {
 }
 
 class ListItem extends StatelessWidget {
-  final List<Item> items;
+  final List<Task> items;
 
   const ListItem({super.key, required this.items});
 

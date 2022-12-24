@@ -1,36 +1,41 @@
-import 'package:crudzoo_flutter_web/api/tasks.dart';
-import 'package:crudzoo_flutter_web/components/ListItem.dart';
-import 'package:flutter/material.dart';
 
-class WorthDoingLater extends StatefulWidget {
-  const WorthDoingLater({super.key});
+import 'package:crudzoo_flutter_web/components/ListItem.dart';
+import 'package:crudzoo_flutter_web/gateway/tasks_gateway.dart';
+import 'package:crudzoo_flutter_web/usecase/tasks_usecase.dart';
+import 'package:flutter/material.dart';
+import 'package:crudzoo_flutter_web/entities/task.dart';
+import '../api/tasks.dart';
+
+class TaskWidget extends StatefulWidget {
+  const TaskWidget({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return WorthDoingLaterState();
+    return TasksState();
   }
 }
 
-class WorthDoingLaterState extends State<WorthDoingLater> {
-  late Future<List<TasksResponse>> tasksResponse;
+class TasksState extends State<TaskWidget> {
+  late Future<List<Task>> tasks;
 
   @override
   void initState() {
     super.initState();
-    tasksResponse = fetchTasks();
+    final api = TasksApi();
+    final gateway = TasksGateway(api);
+    final usecase = TasksUsecase(gateway);
+    tasks = usecase.findTasks();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: tasksResponse,
+        future: tasks,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListItem(
                 items: snapshot.data!
-                    .map((e) =>
-                        Item(subject: e.subject, link: e.link, body: e.body))
-                    .toList());
+            );
           }
           return const CircularProgressIndicator();
         });
