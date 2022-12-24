@@ -1,10 +1,8 @@
 
-import 'package:crudzoo_flutter_web/components/ListItem.dart';
-import 'package:crudzoo_flutter_web/gateway/tasks_gateway.dart';
-import 'package:crudzoo_flutter_web/usecase/tasks_usecase.dart';
+import 'package:crudzoo_flutter_web/container.dart';
+import 'package:crudzoo_flutter_web/view/components/ListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:crudzoo_flutter_web/entities/task.dart';
-import '../api/tasks.dart';
 
 class TaskWidget extends StatefulWidget {
   const TaskWidget({super.key});
@@ -21,10 +19,7 @@ class TasksState extends State<TaskWidget> {
   @override
   void initState() {
     super.initState();
-    final api = TasksApi();
-    final gateway = TasksGateway(api);
-    final usecase = TasksUsecase(gateway);
-    tasks = usecase.findTasks();
+    tasks = tasksUsecase.findTasks();
   }
 
   @override

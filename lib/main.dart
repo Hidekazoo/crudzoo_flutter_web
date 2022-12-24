@@ -1,6 +1,7 @@
 import 'package:crudzoo_flutter_web/api/health_check.dart';
-import 'package:crudzoo_flutter_web/components/ListItem.dart';
-import 'package:crudzoo_flutter_web/viewState/worth_doing_later.dart';
+import 'package:crudzoo_flutter_web/view/components/ListItem.dart';
+import 'package:crudzoo_flutter_web/view/pages/tasks.dart';
+import 'package:crudzoo_flutter_web/view/state/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
@@ -8,20 +9,6 @@ import 'package:go_router/go_router.dart';
 Future main() async {
   usePathUrlStrategy();
   runApp(MyApp());
-}
-
-class FirstRoute extends StatelessWidget {
-  const FirstRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: const Text('First Route')),
-        body: Column(children: const [
-          // Text('test app!'),
-          Center(child: TaskWidget())
-        ]));
-  }
 }
 
 class SecondRoute extends StatelessWidget {
@@ -143,7 +130,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const FirstRoute();
+          return const TasksPage();
         },
       ),
       GoRoute(
