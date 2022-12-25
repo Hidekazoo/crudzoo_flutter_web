@@ -20,7 +20,7 @@ void main() {
           ]);
       final target = TasksGateway(api);
       final actual = await target.findTasks();
-      final matcher = [Task("title", "https://example.com", "body")];
+      final matcher = [const Task("title", "https://example.com", "body")];
       verify(api.fetchTasks());
       expect(actual, equals(matcher));
     });

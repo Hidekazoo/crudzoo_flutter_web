@@ -9,7 +9,13 @@ class TasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tasks')),
+      appBar: AppBar(
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(onPressed: () {}, icon: const Icon(Icons.menu));
+            },
+          ),
+          title: const Text('Tasks')),
       body: Column(children: const [
         Center(child: TaskWidget())
       ],)
