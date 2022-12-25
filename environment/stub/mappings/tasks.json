@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/tasks"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "data": [
+        {
+          "subject": "test",
+          "link": "http://example.com",
+          "body": "body"
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST,GET,OPTIONS"
+    }
+  }
+}

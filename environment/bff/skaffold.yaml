@@ -1,0 +1,9 @@
+apiVersion: skaffold/v3
+kind: Config
+deploy:
+  kubectl:
+    {}
+manifests:
+  rawYaml:
+    - ./deployment.yaml
+    - ./service.yaml

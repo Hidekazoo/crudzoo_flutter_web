@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bff
+spec:
+  selector:
+    matchLabels:
+      app: bff
+  template:
+    metadata:
+      labels:
+        app: bff
+    spec:
+      containers:
+        - name: bff
+          image: wiremock/wiremock:2.35.0
+          ports:
+            - containerPort: 8080
