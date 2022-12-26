@@ -1,6 +1,7 @@
 import 'package:crudzoo_flutter_web/main.dart';
 import 'package:crudzoo_flutter_web/view/state/tasks.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TasksPage extends StatelessWidget {
   const TasksPage({super.key});
@@ -25,17 +26,22 @@ class TasksPage extends StatelessWidget {
         drawer: Drawer(
           child: ListView(
             children: [
-              ListTile(
-                  title: const Text('Tasks'),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => const TasksPage()));
-                  }),
+              // Builder(builder: (BuildContext context) {
+              //   return
+                  ListTile(
+                    title: const Text('Tasks'),
+                    onTap: () {
+                      context.go('/tasks');
+                      // Navigator.push(context, MaterialPageRoute(
+                      //     builder: (context) => const TasksPage()));
+                    }),
+              // }),
               ListTile(
                   title: const Text('Health Checks'),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => const SecondRoute()));
+                    context.go('/health_check');
+                    // Navigator.push(context, MaterialPageRoute(
+                    //     builder: (context) => const SecondRoute()));
                   }
               ),
             ],

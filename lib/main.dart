@@ -20,16 +20,10 @@ class SecondRoute extends StatelessWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const MyStatelessWidget(),
+          children: const [
             Center(
-                child: ElevatedButton(
-              onPressed: () {
-                // Navigate back to first route when tapped.
-                Navigator.pop(context);
-              },
-              child: const Text('Go back!'),
-            )),
+              child: MyStatelessWidget(),
+            )
           ],
         ));
   }
@@ -138,7 +132,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       GoRoute(path: '/health_check', builder: (BuildContext context, GoRouterState state) {
-        return const HealthCheck();
+        return const SecondRoute();
       })
     ],
   );
