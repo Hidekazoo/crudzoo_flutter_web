@@ -1,7 +1,5 @@
 import 'package:crudzoo_flutter_web/api/health_check.dart';
-import 'package:crudzoo_flutter_web/view/components/ListItem.dart';
 import 'package:crudzoo_flutter_web/view/pages/tasks.dart';
-import 'package:crudzoo_flutter_web/view/state/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
@@ -134,11 +132,14 @@ class MyApp extends StatelessWidget {
         },
       ),
       GoRoute(
-        path: '/b',
+        path: '/tasks',
         builder: (BuildContext context, GoRouterState state) {
-          return const SecondRoute();
+          return const TasksPage();
         },
       ),
+      GoRoute(path: '/health_check', builder: (BuildContext context, GoRouterState state) {
+        return const HealthCheck();
+      })
     ],
   );
 
