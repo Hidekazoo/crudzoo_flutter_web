@@ -1,9 +1,9 @@
 import 'package:crudzoo_flutter_web/api/tasks.dart';
-import 'package:crudzoo_flutter_web/gateway/tasks_gateway.dart';
-import 'tasks_gateway_test.mocks.dart';
+import 'package:crudzoo_flutter_web/repository/tasks_repository.dart';
+import 'tasks_repository_test.mocks.dart';
 import 'package:test/test.dart';
 
-import 'package:crudzoo_flutter_web/entities/task.dart';
+import 'package:crudzoo_flutter_web/domain/task.dart';
 
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -16,11 +16,11 @@ void main() {
       final api = MockTasksApi();
       when(api.fetchTasks()).thenAnswer((realInvocation) async => [
             const TasksResponse(
-                subject: "title", link: "https://example.com", body: "body")
+                id:"test_id", subject: "title", link: "https://example.com", body: "body")
           ]);
       final target = TasksGateway(api);
       final actual = await target.findTasks();
-      final matcher = [const Task("title", "https://example.com", "body")];
+      const matcher = [Task("test_id","title", "https://example.com", "body")];
       verify(api.fetchTasks());
       expect(actual, equals(matcher));
     });

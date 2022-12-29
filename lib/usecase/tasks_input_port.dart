@@ -1,6 +1,6 @@
 
 
-import '../entities/task.dart';
+import '../domain/task.dart';
 
 abstract class TasksInputPort {
   Future<List<Task>> findTasks();

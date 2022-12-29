@@ -2,10 +2,15 @@
 import 'package:crudzoo_flutter_web/container.dart';
 import 'package:crudzoo_flutter_web/view/components/ListItem.dart';
 import 'package:flutter/material.dart';
-import 'package:crudzoo_flutter_web/entities/task.dart';
+import 'package:crudzoo_flutter_web/domain/task.dart';
 
 class TaskWidget extends StatefulWidget {
   const TaskWidget({super.key});
+
+  @override
+  void initState() {
+
+  }
 
   @override
   State<StatefulWidget> createState() {

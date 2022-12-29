@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:crudzoo_flutter_web/entities/task.dart' as _i2;
+import 'package:crudzoo_flutter_web/domain/task.dart' as _i2;
 import 'package:crudzoo_flutter_web/usecase/tasks_input_port.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -25,6 +25,12 @@ import 'package:mockito/mockito.dart' as _i1;
 /// See the documentation for Mockito's code generation for more information.
 class MockTask extends _i1.Mock implements _i2.Task {
   @override
+  String get id => (super.noSuchMethod(
+        Invocation.getter(#id),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
   String get subject => (super.noSuchMethod(
         Invocation.getter(#subject),
         returnValue: '',
@@ -42,6 +48,12 @@ class MockTask extends _i1.Mock implements _i2.Task {
         returnValue: '',
         returnValueForMissingStub: '',
       ) as String);
+  @override
+  List<Object> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object>[],
+        returnValueForMissingStub: <Object>[],
+      ) as List<Object>);
 }
 
 /// A class which mocks [TasksInputPort].

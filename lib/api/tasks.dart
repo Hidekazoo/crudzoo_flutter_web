@@ -31,15 +31,22 @@ Future<List<TasksResponse>> fetchTasks() async {
 }
 
 class TasksResponse {
+  final String id;
   final String subject;
   final String link;
   final String body;
 
   const TasksResponse(
-      {required this.subject, required this.link, required this.body});
+      {required this.id,
+      required this.subject,
+      required this.link,
+      required this.body});
 
   factory TasksResponse.fromJson(Map<String, dynamic> json) {
     return TasksResponse(
-        subject: json['subject'], link: json['link'], body: json['body']);
+        id: json['id'],
+        subject: json['subject'],
+        link: json['link'],
+        body: json['body']);
   }
 }

@@ -1,5 +1,5 @@
 
-import 'package:crudzoo_flutter_web/entities/task.dart';
+import 'package:crudzoo_flutter_web/domain/task.dart';
 import 'tasks_usecase_test.mocks.dart';
 import 'package:crudzoo_flutter_web/usecase/tasks_input_port.dart';
 import 'package:crudzoo_flutter_web/usecase/tasks_usecase.dart';
@@ -14,7 +14,7 @@ void main() {
   group('tasks_usecase', () {
     test('find tasks', () async {
       final inputPort = MockTasksInputPort();
-      final target = TasksUsecase(inputPort);
+      final target = TasksUsecaseImpl(inputPort);
       final tasks = MockTask();
       when(inputPort.findTasks()).thenAnswer((_) async => [tasks]);
 
