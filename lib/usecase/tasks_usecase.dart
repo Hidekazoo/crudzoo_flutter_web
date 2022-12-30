@@ -2,21 +2,22 @@
 
 import 'package:crudzoo_flutter_web/domain/task.dart';
 import 'package:crudzoo_flutter_web/usecase/tasks_input_port.dart';
+import 'package:crudzoo_flutter_web/usecase/tasks_output_port.dart';
 
 class TasksUsecaseImpl implements TasksUsecase {
   final TasksInputPort tasksInputPort;
+  final TasksOutputPort tasksOutputPort;
 
-  const TasksUsecaseImpl(this.tasksInputPort);
+  const TasksUsecaseImpl(this.tasksInputPort, this.tasksOutputPort);
 
   @override
-  Future<List<Task>> findTasks() async {
+  Future<void> loadTasks() async {
     final tasks = await tasksInputPort.findTasks();
-    return tasks;
+    tasksOutputPort.setTasks(tasks);
   }
 }
 
 abstract class TasksUsecase {
-  Future<List<Task>> findTasks();
+  Future<void> loadTasks();
 }
-
 

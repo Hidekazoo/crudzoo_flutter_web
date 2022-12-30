@@ -7,6 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:crudzoo_flutter_web/domain/task.dart' as _i2;
 import 'package:crudzoo_flutter_web/usecase/tasks_input_port.dart' as _i3;
+import 'package:crudzoo_flutter_web/usecase/tasks_output_port.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -70,4 +71,18 @@ class MockTasksInputPort extends _i1.Mock implements _i3.TasksInputPort {
         returnValueForMissingStub:
             _i4.Future<List<_i2.Task>>.value(<_i2.Task>[]),
       ) as _i4.Future<List<_i2.Task>>);
+}
+
+/// A class which mocks [TasksOutputPort].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTasksOutputPort extends _i1.Mock implements _i5.TasksOutputPort {
+  @override
+  void setTasks(List<_i2.Task>? tasks) => super.noSuchMethod(
+        Invocation.method(
+          #setTasks,
+          [tasks],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

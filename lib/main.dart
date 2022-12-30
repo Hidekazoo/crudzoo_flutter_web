@@ -1,13 +1,19 @@
 import 'package:crudzoo_flutter_web/api/health_check.dart';
+import 'package:crudzoo_flutter_web/container.dart';
+import 'package:crudzoo_flutter_web/presenter/tasks_presenter.dart';
 import 'package:crudzoo_flutter_web/view/pages/health_check.dart';
 import 'package:crudzoo_flutter_web/view/pages/tasks.dart';
+import 'package:crudzoo_flutter_web/view/state/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final helloWorldProvider = StateProvider((_) => 'Hello world');
 
 Future main() async {
   usePathUrlStrategy();
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class SecondRoute extends StatelessWidget {
@@ -115,7 +121,7 @@ class MyStatelessWidget extends StatelessWidget {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   MyApp({Key? key}) : super(key: key);
 
   final GoRouter _router = GoRouter(
@@ -123,23 +129,25 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const TasksPage();
+          return TaskPageView();
         },
       ),
       GoRoute(
         path: '/tasks',
         builder: (BuildContext context, GoRouterState state) {
-          return const TasksPage();
+          return TaskPageView();
         },
       ),
-      GoRoute(path: '/health_check', builder: (BuildContext context, GoRouterState state) {
-        return const HealthCheckPage();
-      })
+      GoRoute(
+          path: '/health_check',
+          builder: (BuildContext context, GoRouterState state) {
+            return const HealthCheckPage();
+          })
     ],
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       routerConfig: _router,
       title: 'example',

@@ -1,5 +1,6 @@
 
 import 'package:crudzoo_flutter_web/domain/task.dart';
+import 'package:crudzoo_flutter_web/usecase/tasks_output_port.dart';
 import 'tasks_usecase_test.mocks.dart';
 import 'package:crudzoo_flutter_web/usecase/tasks_input_port.dart';
 import 'package:crudzoo_flutter_web/usecase/tasks_usecase.dart';
@@ -8,19 +9,20 @@ import 'package:test/test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-@GenerateNiceMocks([MockSpec<Task>(), MockSpec<TasksInputPort>()])
+@GenerateNiceMocks([MockSpec<Task>(), MockSpec<TasksInputPort>(), MockSpec<TasksOutputPort>()])
 
 void main() {
   group('tasks_usecase', () {
-    test('find tasks', () async {
+    test('load tasks', () async {
       final inputPort = MockTasksInputPort();
-      final target = TasksUsecaseImpl(inputPort);
+      final outputPort = MockTasksOutputPort();
+      final target = TasksUsecaseImpl(inputPort, outputPort);
       final tasks = MockTask();
       when(inputPort.findTasks()).thenAnswer((_) async => [tasks]);
 
-      final actual = await target.findTasks();
+      await target.loadTasks();
       verify(inputPort.findTasks());
-      expect(actual, equals([tasks]));
+      verify(outputPort.setTasks([tasks]));
     });
   });
 
