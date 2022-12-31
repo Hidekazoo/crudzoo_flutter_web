@@ -1,6 +1,9 @@
+import 'package:crudzoo_flutter_web/domain/task.dart';
+import 'package:crudzoo_flutter_web/view/provider/tasks.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddTaskForm extends StatefulWidget {
+class AddTaskForm extends ConsumerStatefulWidget {
   const AddTaskForm({super.key});
 
   @override
@@ -9,16 +12,18 @@ class AddTaskForm extends StatefulWidget {
   }
 }
 
-class AddTaskFormState extends State<AddTaskForm> {
+class AddTaskFormState extends ConsumerState<AddTaskForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final titleController = TextEditingController();
+  final subjectController = TextEditingController();
   final bodyController = TextEditingController();
+  final linkController = TextEditingController();
 
   @override
   void dispose() {
-    titleController.dispose();
+    subjectController.dispose();
     bodyController.dispose();
+    linkController.dispose();
     super.dispose();
   }
 
@@ -35,9 +40,9 @@ class AddTaskFormState extends State<AddTaskForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     TextFormField(
-                      controller: titleController,
+                      controller: subjectController,
                       decoration:
-                          const InputDecoration(hintText: 'Enter task title'),
+                          const InputDecoration(hintText: 'Enter subject'),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -46,13 +51,16 @@ class AddTaskFormState extends State<AddTaskForm> {
                       },
                     ),
                     TextFormField(
-                      controller: bodyController,
-                      decoration:
-                          const InputDecoration(hintText: 'Enter task body'),
+                      controller: linkController,
+                      decoration: const InputDecoration(hintText: 'Enter link'),
                       validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: bodyController,
+                      decoration: const InputDecoration(hintText: 'Enter body'),
+                      validator: (String? value) {
                         return null;
                       },
                     ),
@@ -61,22 +69,24 @@ class AddTaskFormState extends State<AddTaskForm> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            final content = TaskContent(subjectController.text,
+                                linkController.text, bodyController.text);
                             final messenger = ScaffoldMessenger.of(context);
+                            ref.read(tasksUsecaseProvider).createTask(content);
                             ScaffoldMessenger.of(context).showMaterialBanner(
-                              MaterialBanner(
-                                  content: const Text('Processing Data'),
-                                  leading: const Icon(Icons.info, color: Colors.white),
-                                  backgroundColor: Colors.blueAccent,
-                                  actions: [
-                                    TextButton(
-                                      child: const Text('hide'),
-                                      onPressed: () {
-                                        messenger.hideCurrentMaterialBanner();
-                                      },
-                                    ),
-                                  ]
-                              ),
-                            );
+                                MaterialBanner(
+                                    content: const Text('Create Task Success'),
+                                    leading: const Icon(Icons.info,
+                                        color: Colors.white),
+                                    backgroundColor: Colors.greenAccent,
+                                    actions: [
+                                  TextButton(
+                                    child: const Text('hide'),
+                                    onPressed: () {
+                                      messenger.hideCurrentMaterialBanner();
+                                    },
+                                  ),
+                                ]));
                           }
                         },
                         child: const Text('Add'),

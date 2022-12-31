@@ -13,7 +13,7 @@ class TasksPresenter implements TasksOutputPort {
 
   @override
   void setTasks(List<Task> tasks) {
-    final viewTasks = tasks.map((e) => ViewTask(e.id, e.subject, e.link, e.body)).toList();
+    final viewTasks = tasks.map((e) => ViewTask(e.id, e.taskContent.subject, e.taskContent.link, e.taskContent.body)).toList();
     final provider = ref.read(tasksProvider.notifier);
     provider.addTasks(viewTasks);
   }

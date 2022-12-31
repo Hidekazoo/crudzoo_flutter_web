@@ -11,6 +11,7 @@ import 'package:mockito/mockito.dart';
 
 @GenerateNiceMocks([MockSpec<Task>(), MockSpec<TasksInputPort>(), MockSpec<TasksOutputPort>()])
 
+@GenerateNiceMocks([MockSpec<TaskContent>()])
 void main() {
   group('tasks_usecase', () {
     test('load tasks', () async {
@@ -23,6 +24,21 @@ void main() {
       await target.loadTasks();
       verify(inputPort.findTasks());
       verify(outputPort.setTasks([tasks]));
+    });
+
+    test('create task', () async {
+      final inputPort = MockTasksInputPort();
+      final outputPort = MockTasksOutputPort();
+
+      final mockTaskContent = MockTaskContent();
+      final mockTask = MockTask();
+
+      when(inputPort.createTask(mockTaskContent)).thenAnswer((_) async => mockTask);
+
+      final target = TasksUsecaseImpl(inputPort, outputPort);
+      final actual = await target.createTask(mockTaskContent);
+      verify(inputPort.createTask(mockTaskContent));
+      expect(actual, mockTask);
     });
   });
 

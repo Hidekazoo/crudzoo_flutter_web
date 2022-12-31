@@ -11,7 +11,7 @@ void main() {
   group('tasks_presenter', () {
     test('set_tasks', () {
       final tasks = [
-        const Task("test_id", "test_subject", "test_link", "test_body")
+        const Task("test_id", TaskContent("test_subject", "test_link", "test_body"))
       ];
       final container = ProviderContainer();
       addTearDown(container.dispose);

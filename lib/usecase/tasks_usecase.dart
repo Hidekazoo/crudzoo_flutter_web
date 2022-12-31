@@ -15,9 +15,16 @@ class TasksUsecaseImpl implements TasksUsecase {
     final tasks = await tasksInputPort.findTasks();
     tasksOutputPort.setTasks(tasks);
   }
+
+  @override
+  Future<Task> createTask(TaskContent content) async {
+    final task = await tasksInputPort.createTask(content);
+    return task;
+  }
 }
 
 abstract class TasksUsecase {
   Future<void> loadTasks();
+  Future<Task> createTask(TaskContent content);
 }
 

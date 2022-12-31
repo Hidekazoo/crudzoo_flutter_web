@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/tasks",
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "subject": "test_subject",
+          "link": "test_link",
+          "body": "test_body"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "jsonBody": {
+      "data": {
+        "id": "16741302-E6BD-4DCB-91B2-315927CF5B7C",
+        "subject": "test_subject",
+        "link": "test_link",
+        "body": "test_body"
+      }
+    },
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST,GET,OPTIONS"
+    }
+  }
+}

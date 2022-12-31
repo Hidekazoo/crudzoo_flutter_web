@@ -11,8 +11,14 @@ class TasksGateway implements TasksInputPort {
   Future<List<Task>> findTasks() async {
     final tasksResponse = await tasksApi.fetchTasks();
     final List<Task> tasks = tasksResponse
-        .map((item) => Task(item.id, item.subject, item.link, item.body))
+        .map((item) => Task(item.id, TaskContent(item.subject, item.link, item.body)))
         .toList();
     return tasks;
+  }
+
+  @override
+  Future<Task> createTask(TaskContent content) async {
+   final tasksResponse = await tasksApi.postTask(content.subject, content.link, content.body);
+   return Task(tasksResponse.id, TaskContent(tasksResponse.subject, tasksResponse.link, tasksResponse.body));
   }
 }

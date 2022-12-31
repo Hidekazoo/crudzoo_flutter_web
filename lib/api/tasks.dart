@@ -12,23 +12,41 @@ class TasksApi {
           .toList();
       return items;
     } else {
-      throw Exception("Failed to fetch worth doing later");
+      throw Exception("Failed to fetch tasks");
+    }
+  }
+
+  Future<TasksResponse> postTask(
+      String subject, String link, String body) async {
+    final response = await http.post(
+        Uri.parse(
+            '${const String.fromEnvironment('API_ENDPOINT', defaultValue: "")}/tasks'),
+        body: jsonEncode(
+            <String, String>{"subject": subject, "link": link, "body": body}));
+
+    if (response.statusCode == 201) {
+      final item = (jsonDecode(response.body)['data']);
+      final task = TasksResponse.fromJson(item);
+
+      return task;
+    } else {
+      throw Exception("Failed to post task");
     }
   }
 }
 
-Future<List<TasksResponse>> fetchTasks() async {
-  final response = await http.get(Uri.parse(
-      '${const String.fromEnvironment('API_ENDPOINT', defaultValue: "")}/tasks'));
-  if (response.statusCode == 200) {
-    var items = (jsonDecode(response.body)['data'] as List)
-        .map((e) => TasksResponse.fromJson(e))
-        .toList();
-    return items;
-  } else {
-    throw Exception("Failed to fetch tasks");
-  }
-}
+// Future<List<TasksResponse>> fetchTasks() async {
+//   final response = await http.get(Uri.parse(
+//       '${const String.fromEnvironment('API_ENDPOINT', defaultValue: "")}/tasks'));
+//   if (response.statusCode == 200) {
+//     var items = (jsonDecode(response.body)['data'] as List)
+//         .map((e) => TasksResponse.fromJson(e))
+//         .toList();
+//     return items;
+//   } else {
+//     throw Exception("Failed to fetch tasks");
+//   }
+// }
 
 class TasksResponse {
   final String id;
