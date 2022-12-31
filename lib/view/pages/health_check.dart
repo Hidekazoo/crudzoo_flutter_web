@@ -1,6 +1,6 @@
 import 'package:crudzoo_flutter_web/main.dart';
 import 'package:crudzoo_flutter_web/view/components/base_layout.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class HealthCheckPage extends StatelessWidget {
   const HealthCheckPage({super.key});

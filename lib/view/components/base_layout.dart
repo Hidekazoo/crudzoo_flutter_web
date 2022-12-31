@@ -29,6 +29,13 @@ class BaseLayout extends StatelessWidget {
               // Builder(builder: (BuildContext context) {
               //   return
               ListTile(
+                  title: const Text('Home'),
+                  onTap: () {
+                    context.go('/');
+                    // Navigator.push(context, MaterialPageRoute(
+                    //     builder: (context) => const TasksPage()));
+                  }),
+              ListTile(
                   title: const Text('Tasks'),
                   onTap: () {
                     context.go('/tasks');

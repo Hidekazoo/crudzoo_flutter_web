@@ -26,7 +26,7 @@ class ListItem extends StatelessWidget {
             .map((element) => Card(
                   child: ExpansionTile(
                     title: Text(element.subject),
-                    subtitle: const Text("タイトルに対する何かの表記"),
+                    subtitle: const Text("サブタイトル"),
                     leading: const Icon(Icons.import_contacts_sharp),
                     controlAffinity: ListTileControlAffinity.trailing,
                     children: <Widget>[

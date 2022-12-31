@@ -2,6 +2,7 @@ import 'package:crudzoo_flutter_web/api/health_check.dart';
 import 'package:crudzoo_flutter_web/container.dart';
 import 'package:crudzoo_flutter_web/presenter/tasks_presenter.dart';
 import 'package:crudzoo_flutter_web/view/pages/health_check.dart';
+import 'package:crudzoo_flutter_web/view/pages/home.dart';
 import 'package:crudzoo_flutter_web/view/pages/tasks.dart';
 import 'package:crudzoo_flutter_web/view/state/tasks.dart';
 import 'package:flutter/material.dart';
@@ -129,13 +130,13 @@ class MyApp extends ConsumerWidget {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return TaskPageView();
+          return const HomePage();
         },
       ),
       GoRoute(
         path: '/tasks',
         builder: (BuildContext context, GoRouterState state) {
-          return TaskPageView();
+          return const TaskPageView();
         },
       ),
       GoRoute(
