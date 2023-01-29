@@ -18,9 +18,11 @@ class TasksApi {
 
   Future<TasksResponse> postTask(
       String subject, String link, String body) async {
+    Map<String, String> headers = {'content-type': 'application/json'};
     final response = await http.post(
         Uri.parse(
             '${const String.fromEnvironment('API_ENDPOINT', defaultValue: "")}/tasks'),
+        headers: headers,
         body: jsonEncode(
             <String, String>{"subject": subject, "link": link, "body": body}));
 
